@@ -1,0 +1,86 @@
+<div class="contact">
+<div class="text-center" style="font-size:36px; font-weight:bold;">
+		Work
+		<br>
+		</div>
+
+<div class="text-center">
+	<br>
+<p>I let my work speak for itself, showing a passion for high fidelity sound recordings with a work history of 
+	taking on a wide range of productions with complex requirements. I love coming up with creative solutions & 
+	overcoming the challenges of working on location to deliver high quality location sound despite each production’s 
+	unique needs.<p>
+	<br>
+		<a href="https://www.youtube.com/playlist?list=PLd3WWjAta1f--1Wg0EPz7SaVmrWXNQP02" target="_blank" class="btn btn-dark btn-lg btn-circle">
+		Playlist of some projects I've worked on <i class="fa-brands fa-youtube"></i></a>
+		<a href="https://www.imdb.com/name/nm9808637/" target="_blank" class="btn btn-dark btn-lg btn-circle">
+		Link to my IMDB <i class="fa-brands fa-imdb"></i></a>
+	<div class="card mt-3">
+	<div class="card-header bg-dark">
+		<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8">
+			<h4>Full List Of Projects</h4>
+			<br>
+		<button class="btn btn-success" ng-click="getAllMovies()">Refresh Projects</button>
+		</div>
+		<div class="col-md-2;">
+			<!-- Needs admin Control -->
+			<a class="btn btn-info" href="#!create">Create Project</a>
+			<!-- Needs admin Control -->
+			<br>
+			<br>
+			Search: <input type="text" maxlength="15" ng-model="searchValue">
+		</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<table class="table table-hover">
+			<thead class="thead-light">
+				<tr>
+					<th><button class="btn btn-dark" ng-click="orderByColumn('title')">Title</button></th>
+					<th><button class="btn btn-dark" ng-click="orderByColumn('production')">Production</button></th>
+					<th><button class="btn btn-dark" ng-click="orderByColumn('releaseYear')">Release Year</button></th>
+					<th>Poster</th>	 
+					<th>Link</th>						
+				</tr>
+			</thead>
+			<tbody ng-show="!showSpinner">
+				<!-- Needs admin Control -->
+				<tr style="color: white; background: black;" ng-repeat="movie in movies | filter:searchValue | orderBy:orderByValue:reverse" 
+				ng-click="goToUpdateView(movie.id)" >
+				<!-- Needs admin Control -->
+					<td>{{movie.title}}</td>
+					<td>{{movie.production}}</td>
+					<td>{{movie.releaseYear | limitTo:4}}</td>			
+					<td><img class="img-fluid" src="images/Posters/{{movie.id}}.png" alt="Image not found" onerror="this.src='images/Posters/0.png';" style="width:75px;height:120px;"></td>
+					<td><br><a href="{{movie.link}}" target="_blank" class="btn btn-dark" ng-show="movie.link">Click here to watch 
+						<i class="fa-solid fa-play" style="color: #ffffff;"></i>
+					</a></td>	
+				</tr>
+			</tbody>		
+		</table>	
+		<div ng-show="showSpinner" class="myspinner">
+	<div class="spinner-border" style="width: 5rem; height: 5rem;"></div>
+	<br>
+	<p>Loading search results...</p>
+</div>	
+	</div>
+	<div class="card-footer bg-dark">
+		Please select a project for update/delete
+	</div>
+</div>
+	
+
+<section class="footer">
+		<div>
+			<div class="container">
+			<div class="text-center">
+				<br>
+				<img src="images/Footer/Ryan Bates Sound Logo Without Info.png" style="width:100px;height:100px;">
+				<br>
+				</div>
+			</div>
+			</div>
+		</section>

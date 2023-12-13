@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800&display=swap');
+*
+{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+.navbar-dark {
+ padding-left: calc(.667em + 2px) calc(1.333em + 2px);
+ /* padding-left: 350px;
+ */
+  background-color: #000000;
+  font-size: 25px;
+}
+a {display: inline-block;}
+
+body {
+    background-color:rgb(0, 0, 0);
+    height:auto;
+  }
+  
+.wrapper-main {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+  h1 {
+	font-weight: bold;
+    color: rgb(255, 255, 255);
+  }
+  
+  h2 {
+	  font-weight: bold;
+  }
+  
+  h3 {
+	  font-weight: bold; 
+  }
+  
+  h5 {
+	  font-weight: bold;
+	  font-size: 20px;
+  }
+  
+  h6 {
+	  font-size: 18px;
+  }
+  p {
+    color: rgb(0, 0, 0);
+  }
+  
+  .card {
+	 background-color:rgb(0, 0, 0);
+	 box-sizing: border-box;
+	 color: white;
+	height: auto;
+	width:auto;
+  }
+  
+ .front-logo-header {
+/*	margin-top: 20px;
+*/
+	width: 100%;
+	 background-color: #817b7a;
+	/* margin: 0px;
+	 padding: 0px;
+	 height:auto;*/
+ }
+ 
+ section {
+	 position: relative;
+	 width: 100%;
+	 padding: 0px;
+ }
+.circle {
+	position: relative;
+	overflow: hidden;
+}
+.circle.circle1 {
+	width: 275px;
+	height: 275px;
+	float: left;
+	border-radius: 50%;
+	margin: 0px;
+}
+.chat {
+	 background-color: rgb(81, 78, 77);
+	 min-width:100%;
+	 height:auto;
+	 padding: 0px;
+	 margin: 0px;
+	 font-weight: normal;
+	 font-size: 30px;
+	 color: white;
+}
+.clients {
+	background-color: rgb(192, 192, 192);
+	 min-width:100%;
+	 height:auto;
+	 padding: 0px;
+	 margin: 0px;
+	 font-weight: normal;
+	 font-size: 30px;
+	 
+}
+.sound-mixer {
+	background-color: #817b7a;
+	/*
+	 min-width:100%;
+	 height:auto;
+	 padding: 0px;
+	 margin: 0px;
+	 */
+	 font-weight: normal;
+	 font-size: 18px;
+	 color: black;
+}
+
+.equipment {
+	background-color: rgb(192, 192, 192);
+	/* min-width:100%;
+	 height:auto;
+	 padding: 0px;
+	 margin: 0px;
+	 */
+	 font-weight: normal;
+	 font-size: 30px;
+	 
+}
+
+.footer {
+	background-color: rgb(81, 78, 77);
+	 min-width:100%;
+	 height:auto;
+	 padding: 0px;
+	 margin: 0px;
+	 font-weight: normal;
+	 font-size: 30px;
+	 color: white;
+}
+
+.responsive {
+	width: 60%;
+	height: auto;
+	
+}
+
+.contact {
+	background-color:rgb(192, 192, 192);
+	 min-width:100%;
+	height:auto;
+	padding: 0px;
+	 margin: 0px;
+	 color: rgb(0, 0, 0);
+}
+
+  .carousel-inner img {
+    width: 50%;
+    height: 50%;
+  }
+  .carousel-indicators img {
+    width: 50%;
+    height: 50%;
+  }
+  
+  .carousel-item img {
+	 width:650px;
+	 height:475px;
+	 }
+	 .carousel-caption {
+    background: rgba(0, 0, 0, 0.50);
+}
+.myspinner {
+		height: 100vh;
+		display:flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
