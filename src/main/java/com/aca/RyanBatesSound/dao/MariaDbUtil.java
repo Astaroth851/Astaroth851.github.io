@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class MariaDbUtil {
 
 	private static String connectionUrl = 
-			"jdbc:mariadb://localhost:3306/soundmovies?user=root&password=password";
+			"jdbc:mongodb://atlas-sql-6579308135cbe34439fefa5f-drchd.a.query.mongodb.net/SoundMovies?ssl=true&authSource=admin";
 	
 	public static Connection getConnection() {
 		Connection connection = null;
