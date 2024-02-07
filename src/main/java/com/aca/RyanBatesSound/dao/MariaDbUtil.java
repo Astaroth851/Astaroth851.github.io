@@ -14,8 +14,10 @@ public class MariaDbUtil {
 	public static Connection getConnection() {
 		Connection connection = null;
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			connection = DriverManager.getConnection(connectionUrl);
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql://aws.connect.psdb.cloud/soundmovies?sslMode=VERIFY_IDENTITY",
+ 	 "9b9a17nrr8z3vzhd72ec",
+  	"************");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
