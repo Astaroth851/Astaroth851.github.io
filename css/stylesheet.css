@@ -6,14 +6,57 @@
 	box-sizing: border-box;
 	font-family: 'Poppins', sans-serif;
 }
+
 .navbar-dark {
- padding-left: calc(.667em + 2px) calc(1.333em + 2px);
+ 
+ /*padding-left: calc(.667em + 2px) calc(1.333em + 2px);*/
  /* padding-left: 350px;
+ font-size: 25px;
  */
   background-color: #000000;
-  font-size: 25px;
+  font-size: 27px;
 }
 a {display: inline-block;}
+
+.embed-responsive {
+	 position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+
+.embed-responsive .embed-responsive-item,
+.embed-responsive iframe,
+.embed-responsive embed,
+.embed-responsive object,
+.embed-responsive video {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+circle-body {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.headshot-container {
+	max-width: 80%;
+	display: inline-block;
+	 margin-top: 20px;
+}
+.headshot-image {
+	max-width: 100%;
+	height: auto;
+	clip-path: circle();
+}
 
 body {
     background-color:rgb(0, 0, 0);
@@ -58,9 +101,16 @@ body {
 	width:auto;
   }
   
+  .biography-header {
+	  font-size: 30px;
+	  font-weight: bold;
+	  text-align: center;
+  }
  .front-logo-header {
 /*	margin-top: 20px;
 */
+	font-size: 25px;
+	font-weight: bold; 
 	width: 100%;
 	 background-color: #817b7a;
 	/* margin: 0px;
@@ -73,17 +123,7 @@ body {
 	 width: 100%;
 	 padding: 0px;
  }
-.circle {
-	position: relative;
-	overflow: hidden;
-}
-.circle.circle1 {
-	width: 275px;
-	height: 275px;
-	float: left;
-	border-radius: 50%;
-	margin: 0px;
-}
+ 
 .chat {
 	 background-color: rgb(81, 78, 77);
 	 min-width:100%;
@@ -115,6 +155,7 @@ body {
 	 font-weight: normal;
 	 font-size: 18px;
 	 color: black;
+	 justify-content: center;
 }
 
 .equipment {
@@ -141,14 +182,15 @@ body {
 }
 
 .responsive {
-	/*
-	width: 100%;
-	*/
-	max-width: 100%;
+	width: 60%;
 	height: auto;
-	
 }
-
+  
+.responsive-image {
+	width: 18%;
+	height: auto;
+	margin-left: 15px;
+}
 .contact {
 	background-color:rgb(192, 192, 192);
 	 min-width:100%;
@@ -157,6 +199,7 @@ body {
 	 margin: 0px;
 	 color: rgb(0, 0, 0);
 }
+
 
   .carousel-inner img {
     width: 50%;
@@ -181,3 +224,84 @@ body {
 		justify-content: center;
 		align-items: center;
 	}
+.center {
+	text-align: center;
+}
+
+.first-image {
+			width: 150px;
+            height: 150px;
+}
+
+@media (max-width: 767px) {
+	.navbar-dark {
+  background-color: #000000;
+  font-size: 16px;
+  text-align: center;
+}	
+ .first-image {
+            width: 300px;
+            height: 300px;
+        }
+}
+
+@media (min-width: 1375px) {
+    .abs-center-x {
+        position: absolute;
+        top: 23px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}    
+
+@media(max-width: 1199px) {
+	
+}
+@media(max-width: 992px) {
+	.front-logo-header {
+		font-size: 22px;
+	}
+		.col-md-12 img:not(#last-image) {
+		display: none;
+	}
+	
+	#last-image {
+		width: 90%;
+		height: auto;
+		justify-content: center;
+		align-items: center;
+		margin: 0 auto;
+		display: block;
+	}
+}
+
+@media (max-width: 768px) {
+	.front-logo-header {
+		font-size: 18px;
+	}
+
+}
+
+@media(max-width: 600px) {
+	.front-logo-header {
+		font-size: 16px;
+	}
+}
+
+@media(max-width: 414px) {
+	.front-logo-header {
+		font-size: 16px;
+	}
+}
+
+@media(max-width: 375px) {
+	.front-logo-header {
+		font-size: 15.5px;
+	}
+}
+
+@media(max-width: 320px) {
+		.front-logo-header {
+		font-size: 12px;
+	}
+}
