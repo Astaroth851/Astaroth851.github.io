@@ -1,3 +1,4 @@
+<div class="container-fluid" style="background-color:rgb(192, 192, 192);">
 <div class="contact">
 	<br>
 	<br>
@@ -9,7 +10,7 @@
 				<h5 class="text-success text-center" ng-bind="updateStatus"></h5>
 			</div>			
 		
-			<div class="card-body">
+			<div class="card-body" style="color: rgb(0, 0, 0);">
 			<form name="updateForm">
 				<div class="form-group">
 					<label for="title" class="font-weight-bold">Title:</label>
@@ -34,6 +35,11 @@
 							required and must be between 2015 and 2025, inclusive
 						</span>
 				</div>
+				<div class="form-group">
+					<label for="link" class="font-weight-bold">Link:</label>
+					<input ng-model="movie.link"
+					 name="link" type="text" class="form-control" id="link">
+				</div>
 				<div>
 					<span class="font-weight-bold">Movie ID:</span> <span
 						ng-bind="movie.id" id="id"></span>
@@ -55,20 +61,21 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-5">		
-		<div>
-		<img class="img-fluid" src="images/Posters/{{movie.id}}.png" alt="Image not found" onerror="this.src='images/Posters/0.png';" style="width:400px;height:600px;">
+	<div class="col-sm-5">	
+		<img class="img" src="images/Posters/{{movie.id}}.png" alt="Image not found" onerror="this.src='images/Posters/0.png';" style="width:400px;height:600px;">
 		<br>
 		<br>
-		</div>
-	</div></div>
+	</div>
 </div>
+</div>
+	</div>	
 <section class="footer">
 		<div>
 			<div class="container">
 			<div class="text-center">
 				<br>
 				<img src="images/Footer/Ryan Bates Sound Logo Without Info.png" style="width:100px;height:100px;">
+				<br>
 				<br>
 				</div>
 			</div>
