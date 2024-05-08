@@ -14,19 +14,16 @@ public class MariaDbUtil {
 			"jdbc:mysql://";
 	
     public static Connection getConnection() {
-    	 Dotenv dotenv = Dotenv.configure().directory(new File(".env").getAbsolutePath()).load();
+    	 Dotenv dotenv = Dotenv.configure().directory("C:\\Users\\Astar\\OneDrive\\eclipse-workspace\\RyanBatesSound").load();
    	  
     	Connection connection = null;
         try {
         	Class.forName("com.mysql.cj.jdbc.Driver");
-        	//  String dbHost = System.getenv("DATABASE_HOST");
-          //  String dbUsername = System.getenv("DATABASE_USERNAME");
-           // String dbPassword = System.getenv("DATABASE_PASSWORD");
         	String dbHost = dotenv.get("DATABASE_HOST");
             String dbUsername = dotenv.get("DATABASE_USERNAME");
             String dbPassword = dotenv.get("DATABASE_PASSWORD");
              String urlWithCredentials = connectionUrl + dbHost + "?user=" + dbUsername + "&password=" + dbPassword;
-                       
+             
              Properties props = new Properties();
              props.setProperty("user", dbUsername);
              props.setProperty("password", dbPassword);
@@ -54,6 +51,8 @@ public class MariaDbUtil {
 
 
         
+    
+    		
     
     	
     
