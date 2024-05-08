@@ -16,6 +16,7 @@
 			$scope.movie.title = '';
 			$scope.movie.releaseYear = '';
 			$scope.movie.production = '';
+			$scope.movie.link = '';
 			
 			$scope.createForm.$setUntouched();
 			$scope.createForm.$setPristine();
