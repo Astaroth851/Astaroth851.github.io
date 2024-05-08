@@ -4,7 +4,7 @@
 
 
 (function() {
-	var soundapp = angular.module('soundapp', ['ngRoute']);
+	var soundapp = angular.module('soundapp', ['ngRoute','ngFileUpload']);
 
 soundapp.config(function($routeProvider) {
 		$routeProvider
