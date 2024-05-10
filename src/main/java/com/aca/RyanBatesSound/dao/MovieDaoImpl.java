@@ -8,6 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import com.amazonaws.util.Base64;
+import javax.xml.bind.DatatypeConverter;
 
 import com.aca.RyanBatesSound.model.Production;
 import com.aca.RyanBatesSound.model.Movie;
@@ -15,55 +19,62 @@ import com.aca.RyanBatesSound.model.Movie;
 public class MovieDaoImpl implements MovieDao {
 	
 	private static String selectAllMovies = 
-			"SELECT id, title, releaseYear, productionId, updateDateTime, createDateTime, link\r\n" +
+			"SELECT id, title, releaseYear, productionId, updateDateTime, createDateTime, img, link\r\n" +
 			"FROM movies";
 	
 	private static String selectMoviesByProduction = 
-			"SELECT id, title, releaseYear, productionId, updateDateTime, createDateTime, link " +
+			"SELECT id, title, releaseYear, productionId, updateDateTime, createDateTime, img, link " +
 			"FROM movies" +
 			"WHERE productionID = ? ";
 	
 	private static String selectMoviesByReleaseYear = 
-			"SELECT id, title, releaseYear, productionId, updateDateTime, createDateTime, link\r\n" +
+			"SELECT id, title, releaseYear, productionId, updateDateTime, createDateTime, img, link\r\n" +
 			"FROM movies " +
 			"WHERE releaseYear = ?";
 	
 	private static String selectMoviesByTitle =
-			"SELECT id, title, releaseYear, productionId, updateDateTime, createDateTime, link\r\n" + 
+			"SELECT id, title, releaseYear, productionId, updateDateTime, createDateTime, img, link\r\n" + 
 			"FROM movies " +
 			"WHERE title LIKE ? ";
 	
 	private static String selectMoviesById = 
-			"SELECT id, title, releaseYear, productionId, updateDateTime, createDateTime, link " +
+			"SELECT id, title, releaseYear, productionId, updateDateTime, createDateTime, img, link " +
 			"FROM movies " +
 			"WHERE id = ?";
 	
 	private static String selectMoviesByReleaseYearRange = 
-			"SELECT id, title, releaseYear, productionId, updateDateTime, createDateTime, link " +
+			"SELECT id, title, releaseYear, productionId, updateDateTime, createDateTime, img, link " +
 			"FROM movies " +
 			"WHERE releaseYear >= ? " +
 			"AND releaseYear <= ? ";
+	private static String selectMoviesByLink =
+			"SELECT id, title, releaseYear, productionId, updateDateTime, createDateTime, img, link\r\n" + 
+			"FROM movies " +
+			"WHERE link = ?";
+	
+//	private static String selectMoviesByImage =
+//			"SELECT id, title, releaseYear, productionId, updateDateTime, createDateTime, img, link\r\n" + 
+//			"FROM movies " +
+//			"WHERE img = ?";
 	
 	private static String deleteMoviesById = 
 			"DELETE FROM movies " + 
 			"WHERE id = ?";
 	
 	private static String insertMovie =
-			"INSERT INTO movies (title, releaseYear, productionId) " +
+			"INSERT INTO movies (title, releaseYear, productionId, img, link) " +
 			"VALUES " +
-			"(?,?,?)";
+			"(?,?,?,?,?)";
 	
 	private static String updateMovieById = 
 			"UPDATE movies " +
 			"SET title = ?, " +
 			"	 releaseYear = ?," +
-			"	 productionId = ? " +
+			"	 productionId = ?," +
+			"	 img = ?," +
+			"	 link = ? " +
 			"WHERE id = ?";
 	
-	private static String selectMoviesByLink =
-			"SELECT id, title, releaseYear, productionId, updateDateTime, createDateTime, link\r\n" + 
-			"FROM movies " +
-			"WHERE link = ?";
 
 
 	@Override
@@ -73,7 +84,7 @@ public class MovieDaoImpl implements MovieDao {
 		Statement statement = null;
 		
 		Connection connection = MariaDbUtil.getConnection();
-		
+
 		try {
 		statement = connection.createStatement();
 		result = statement.executeQuery(selectAllMovies);
@@ -93,8 +104,17 @@ public class MovieDaoImpl implements MovieDao {
 			movie.setId(result.getInt("id"));
 			movie.setTitle(result.getString("title"));
 			movie.setReleaseYear(result.getInt("releaseYear"));
+		
+			byte[] picture = result.getBytes("img");
+			if (picture != null) {
+				String pictureString = DatatypeConverter.printBase64Binary(picture);
+				movie.setImage(pictureString);
+			} else {
+				movie.setImage(null);
+			}
+			
 			movie.setLink(result.getString("link"));
-
+ 
 			
 			String productionString = result.getString("productionId");
 			Production production = Production.convertStringToProduction(productionString);
@@ -138,7 +158,7 @@ public class MovieDaoImpl implements MovieDao {
 		PreparedStatement statement = null;
 		
 		Connection connection = MariaDbUtil.getConnection();
-		
+	
 		try {
 		statement = connection.prepareStatement(selectMoviesByReleaseYear);
 		statement.setInt(1, releaseYear);
@@ -160,7 +180,7 @@ public class MovieDaoImpl implements MovieDao {
 		PreparedStatement statement = null;
 		
 		Connection connection = MariaDbUtil.getConnection();
-		
+	
 		try {
 		statement = connection.prepareStatement(selectMoviesById);
 		statement.setInt(1, movieId);
@@ -196,16 +216,72 @@ public class MovieDaoImpl implements MovieDao {
 		
 		return myMovies;
 	}
+	
+	@Override
+	public List<Movie> getMoviesByLink(String link) {
+		List<Movie> myMovies = new ArrayList<Movie>();
+		ResultSet result = null;
+		PreparedStatement statement = null;
+		
+		Connection connection = MariaDbUtil.getConnection();
+	
+		try {
+		statement = connection.prepareStatement(selectMoviesByLink);
+		statement.setString(1, link);
+		
+		result = statement.executeQuery();
+		myMovies = makeMovie(result);
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return myMovies;
+	}
+	
+//	@Override
+//	public List<Movie> getMoviesByImage(String img) {
+//		List<Movie> myMovies = new ArrayList<Movie>();
+//		ResultSet result = null;
+//		PreparedStatement statement = null;
+//	
+//		Connection connection = MariaDbUtil.getConnection();	
+//		try {
+//		statement = connection.prepareStatement(selectMoviesByImage);
+//		statement.setString(1, img);
+//		
+//		result = statement.executeQuery();
+//		myMovies = makeMovie(result);
+//		
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return myMovies;	}
+//	
 
 	@Override
 	public Movie createMovie(Movie newMovie) {
 		PreparedStatement ps = null;
 		Connection connection = MariaDbUtil.getConnection();
+	
 		try {
 			ps = connection.prepareStatement(insertMovie);
 			ps.setString(1, newMovie.getTitle());
 			ps.setInt(2, newMovie.getReleaseYear());
 			ps.setString(3, newMovie.getProduction().toString());
+			
+			if (newMovie.getImage() != null) {
+				InputStream stream =
+						new ByteArrayInputStream(Base64.decode(newMovie.getImage()));
+				ps.setBlob(4, stream);
+			} else {
+				ps.setBinaryStream(4, null);
+			}
+			ps.setString(5, newMovie.getLink());
+			
+			
+			//updateRowCount = ps.executeUpdate();
 			int rowCount = ps.executeUpdate();
 			System.out.println("rows inserted: " + rowCount);
 		} catch (SQLException e) {
@@ -222,12 +298,26 @@ public class MovieDaoImpl implements MovieDao {
 	public Movie updateMovie(Movie updateMovie) {
 		PreparedStatement ps = null;
 		Connection connection = MariaDbUtil.getConnection();
+		
 		try {
 			ps = connection.prepareStatement(updateMovieById);
 			ps.setString(1, updateMovie.getTitle());
 			ps.setInt(2, updateMovie.getReleaseYear());
 			ps.setString(3, updateMovie.getProduction().toString());
-			ps.setInt(4, updateMovie.getId());
+			
+			if (updateMovie.getImage() != null) {
+				InputStream stream =
+						new ByteArrayInputStream(Base64.decode(updateMovie.getImage()));
+				ps.setBlob(4, stream);
+			} else {
+				ps.setBinaryStream(4, null);
+			}
+			
+			ps.setString(5, updateMovie.getLink());
+			ps.setInt(6, updateMovie.getId());
+			
+			
+		
 			int rowCount = ps.executeUpdate();
 			System.out.println("rows updated: " + rowCount);
 		} catch (SQLException e) {
@@ -246,7 +336,9 @@ public class MovieDaoImpl implements MovieDao {
 			movieToDelete = movies.get(0);
 			int updateRowCount = 0;
 			PreparedStatement ps = null;
+			
 			Connection connection = MariaDbUtil.getConnection();
+	
 			try {
 				ps = connection.prepareStatement(deleteMoviesById);
 				ps.setInt(1, id);
@@ -267,7 +359,7 @@ public class MovieDaoImpl implements MovieDao {
 		PreparedStatement statement = null;
 		
 		Connection connection = MariaDbUtil.getConnection();
-		
+	
 		try {
 		statement = connection.prepareStatement(selectMoviesByReleaseYearRange);
 		statement.setInt(1, startReleaseYear);
@@ -282,27 +374,5 @@ public class MovieDaoImpl implements MovieDao {
 		
 		return myMovies;
 	}
-
-	@Override
-	public List<Movie> getMoviesByLink(String link) {
-		List<Movie> myMovies = new ArrayList<Movie>();
-		ResultSet result = null;
-		PreparedStatement statement = null;
-		
-		Connection connection = MariaDbUtil.getConnection();
-		
-		try {
-		statement = connection.prepareStatement(selectMoviesByLink);
-		statement.setString(1, link);
-		
-		result = statement.executeQuery();
-		myMovies = makeMovie(result);
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return myMovies;
-	}
-
 }
+
