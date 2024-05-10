@@ -73,6 +73,7 @@ public class MovieController {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Movie createMovie(Movie newMovie) {
+		System.out.println("image: " + newMovie.getImage());
 		return service.createMovie(newMovie);
 	}
 	
