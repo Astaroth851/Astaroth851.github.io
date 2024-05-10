@@ -42,6 +42,22 @@
 							required and must be between 2015 and 2025, inclusive
 						</span>
 					</div>
+					<div class="form-group">
+						<label for="link" class="font-weight-bold">Link:</label>
+						<input ng-model="movie.link" name="link" type="text"
+							class="form-control" id="link">
+					</div>
+					<div class="form-group">
+						<label for="image" class="font-weight-bold">Poster:</label>
+						<input ngf-select accept=".png" ng-model="movie.image" id="fileUploadField"
+						type="file" name="image" ngf-resize="{width: 400, height: 600}">
+						
+						<div class="text-center">
+							<img ngf-src="movie.image" class="img-thumbnail">
+							<br><br>
+						<button ng-show="movie.image" ng-click="movie.image=''">remove</button>
+						</div>
+					</div>
 				</form>
 			</div>
 			<div class="card-footer text-center">
