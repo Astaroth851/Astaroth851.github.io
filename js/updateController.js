@@ -27,6 +27,34 @@
 		$scope.getMoviesById();
 		
 		$scope.updateMovie = function() {
+			 const file = document.getElementById('fileUploadField').files[0];
+		  console.log('File:', file);
+		  const fileReader = new FileReader();
+		  
+		  		// event handler that is called with the load event is fired
+		  fileReader.onload = function(event) {      
+			  var data = fileReader.result;      
+			  if (data !== undefined && data.length > 0) { 
+				       // data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZkAAAHVCAIAAACs 
+				       // XRGOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjw...      
+				       // remove the 'data' name/value      
+				       $scope.movie.image = data.split(',')[1];
+				 } else {      
+					 $scope.movie.image = '';
+				 }      
+				 $scope.postUpdatedMovie();    
+				 }    
+				 // when the readAsDataURL is finished, then the onload event is called 
+				 if (file !== undefined) {      
+					fileReader.readAsDataURL(file);    
+					} else {
+						$scope.movie.image = '';
+						$scope.postUpdatedMovie()
+						}
+		}
+		
+		$scope.postUpdatedMovie = function() {
+			console.log('updateMovie function called');
 			$http.put("/RyanBatesSound/webapi/movies", $scope.movie)
 			.then(function(response) {				
 				$scope.updateStatus = 'update successful';			
@@ -34,7 +62,7 @@
 				$scope.updateStatus = 'error trying to update movie';	
 				console.log('error http PUT movies: ' + response.status);
 			});
-		}
+			}
 		
 		$scope.deleteMovie = function() {
 			$http.delete("/RyanBatesSound/webapi/movies/" + $scope.movie.id)
