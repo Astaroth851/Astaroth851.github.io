@@ -49,7 +49,7 @@
 					<th><button class="btn btn-dark" ng-click="orderByColumn('title')">Title</button></th>
 					<th><button class="btn btn-dark" ng-click="orderByColumn('production')">Production</button></th>
 					<th><button class="btn btn-dark" ng-click="orderByColumn('releaseYear')">Release Year</button></th>
-					<th>Poster</th>	 
+					<th>Poster</th>
 					<th>Link</th>						
 				</tr>
 			</thead>
@@ -60,8 +60,9 @@
 				<!-- Needs admin Control -->
 					<td>{{movie.title}}</td>
 					<td>{{movie.production}}</td>
-					<td>{{movie.releaseYear | limitTo:4}}</td>			
-					<td><img class="img-fluid" src="images/Posters/{{movie.id}}.png" alt="Image not found" onerror="this.src='images/Posters/0.png';" style="width:75px;height:120px;"></td>
+					<td>{{movie.releaseYear | limitTo:4}}</td>	
+					<td><img ng-src="{{movie.image ? 'data:image/png;base64,' + movie.image : 'images/Posters/0.png'}}" class="img-fluid" style="width:75px;height:120px;"></td>		
+				<!--	<td><img class="img-fluid" src="images/Posters/{{movie.id}}.png" alt="Image not found" onerror="this.src='images/Posters/0.png';" style="width:75px;height:120px;"></td>  -->
 					<td><br><a href="{{movie.link}}" target="_blank" class="btn btn-dark" ng-show="movie.link">Click here to watch 
 						<i class="fa-solid fa-play" style="color: #ffffff;"></i>
 					</a></td>	
