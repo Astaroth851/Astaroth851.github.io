@@ -3,8 +3,6 @@
 	soundapp.controller('createController', function($scope, $http) {
 		$scope.productions = ['Short','Documentary','Feature','Commercial','Podcast','Concept','Corporate','ENG'];
 		
-		
-		
 		$scope.createMovie = function() {
 			
 		  const file = document.getElementById('fileUploadField').files[0];
