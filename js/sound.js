@@ -38,6 +38,19 @@ soundapp.config(function($routeProvider) {
 			.when("/resume", {
 				templateUrl: "resume.html"
 			})
+			.when("/test", {
+				templateUrl: "test.html"
+			})
+			 .when("/login", {
+        	templateUrl: "login.html",
+   			 })
+   			  .when("/dashboard", {
+        templateUrl: "dashboard.html",
+        controller: "DashboardController",
+        resolve: {
+            // Add resolve logic to ensure user is authenticated before accessing the dashboard
+        }
+    })
 			.otherwise({
 				templateUrl: "soundmain.html"
 			});
