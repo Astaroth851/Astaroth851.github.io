@@ -43,6 +43,7 @@ soundapp.config(function($routeProvider) {
 			})
 			 .when("/login", {
         	templateUrl: "login.html",
+        	controller: "loginController"
    			 })
    			  .when("/dashboard", {
         templateUrl: "dashboard.html",
