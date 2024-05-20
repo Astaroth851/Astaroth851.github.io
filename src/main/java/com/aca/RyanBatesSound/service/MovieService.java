@@ -44,12 +44,14 @@ public class MovieService {
 		}
 	
 	public Movie createMovie(Movie newMovie) {
+		//might need to come back later for admin control
 		validateReleaseYear(newMovie.getReleaseYear());
 		validateMovieTitle(newMovie.getTitle());
 		return movieDao.createMovie(newMovie);
 	}
 	
 	public Movie updateMovie(Movie updateMovie) {
+		//might need to come back later for admin control
 		validateReleaseYear(updateMovie.getReleaseYear());
 		validateMovieTitle(updateMovie.getTitle());
 		
@@ -65,6 +67,7 @@ public class MovieService {
 
 
 	public Movie deleteMovieById(Integer id) {
+		//might need to come back later for admin control
 		return movieDao.deleteMovieById(id);
 	}
 	
