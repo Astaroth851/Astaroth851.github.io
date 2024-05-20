@@ -52,10 +52,6 @@
 						</div>
 					</div>
 				<div>
-					<span class="font-weight-bold">Movie ID:</span> <span
-						ng-bind="movie.id" id="id"></span>
-				</div>
-				<div>
 					<span class="font-weight-bold">Create Date:</span> <span
 						ng-bind="movie.createDateTime" id="create"></span>
 				</div>
@@ -72,10 +68,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-5">	
+	<div class="col-sm-5">
+			<br>
+			<br>
+		<div class="text-center">	
 		<div ng-show="movie.image" class="img"> 
 		<img src="data:image/png;base64,{{movie.image}}" class="img-fluid"
 		style="width:400px;height:600px;"> 
+	</div>
 	</div>
 		<!--<img class="img" src="images/Posters/{{movie.id}}.png" alt="Image not found" onerror="this.src='images/Posters/0.png';" style="width:400px;height:600px;"> -->
 		<br>
