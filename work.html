@@ -32,7 +32,7 @@
 		</div>
 		<div class="col-md-4 text-right">
 			<!-- Needs admin Control -->
-			<a class="btn btn-info" href="#!create">Create Project</a>
+			<a class="btn btn-info" href="#!create" ng-show="isAdmin">Create Project</a>
 			<!-- Needs admin Control -->
 			<br>
 			<br>
@@ -56,7 +56,7 @@
 			<tbody ng-show="!showSpinner">
 				<!-- Needs admin Control -->
 				<tr style="color: white; background: black;" ng-repeat="movie in movies | filter:searchValue | orderBy:orderByValue:reverse" 
-				ng-click="goToUpdateView(movie.id)" >
+				ng-click="isAdmin ? goToUpdateView(movie.id) : null" >
 				<!-- Needs admin Control -->
 					<td>{{movie.title}}</td>
 					<td>{{movie.production}}</td>
@@ -101,6 +101,7 @@
 			<div class="text-center">
 				<br>
 				<img src="images/Footer/Ryan Bates Sound Logo Without Info.png" style="width:100px;height:100px;">
+				<br>
 				<br>
 				</div>
 			</div>
