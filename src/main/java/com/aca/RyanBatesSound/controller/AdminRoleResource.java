@@ -22,9 +22,9 @@ public class AdminRoleResource {
         String role = (String) request.getSession().getAttribute("userRole");
 
         // Return the user's role as JSON response
-       // return "{\"role\": \"" + role + "\"}";
+        return "{\"role\": \"" + role + "\"}";
 		
-        return "{\"role\": \"admin\"}";
+       // return "{\"role\": \"admin\"}";
     }
 	
 	//private String authenticateUserAndRetrieveRole() {
