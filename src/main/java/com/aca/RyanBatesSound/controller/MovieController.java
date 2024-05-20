@@ -90,9 +90,7 @@ public class MovieController {
 			@QueryParam("endReleaseYear") Integer endReleaseYear) {
 		return service.getReport(startReleaseYear, endReleaseYear);
 	}
-	
-	
-	
+
 
 //	@Produces(MediaType.TEXT_PLAIN)
 //	public String getMovies() {
