@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import com.amazonaws.util.Base64;
-import javax.xml.bind.DatatypeConverter;
+import java.util.Base64;
+
 
 import com.aca.RyanBatesSound.model.Production;
 import com.aca.RyanBatesSound.model.Movie;
@@ -107,7 +107,7 @@ public class MovieDaoImpl implements MovieDao {
 		
 			byte[] picture = result.getBytes("img");
 			if (picture != null) {
-				String pictureString = DatatypeConverter.printBase64Binary(picture);
+				String pictureString = Base64.getEncoder().encodeToString(picture);
 				movie.setImage(pictureString);
 			} else {
 				movie.setImage(null);
@@ -273,7 +273,7 @@ public class MovieDaoImpl implements MovieDao {
 			
 			if (newMovie.getImage() != null) {
 				InputStream stream =
-						new ByteArrayInputStream(Base64.decode(newMovie.getImage()));
+						new ByteArrayInputStream(Base64.getDecoder().decode(newMovie.getImage()));
 				ps.setBlob(4, stream);
 			} else {
 				ps.setBinaryStream(4, null);
@@ -307,7 +307,7 @@ public class MovieDaoImpl implements MovieDao {
 			
 			if (updateMovie.getImage() != null) {
 				InputStream stream =
-						new ByteArrayInputStream(Base64.decode(updateMovie.getImage()));
+						new ByteArrayInputStream(Base64.getDecoder().decode(updateMovie.getImage()));
 				ps.setBlob(4, stream);
 			} else {
 				ps.setBinaryStream(4, null);
@@ -375,4 +375,3 @@ public class MovieDaoImpl implements MovieDao {
 		return myMovies;
 	}
 }
-
