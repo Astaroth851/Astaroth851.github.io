@@ -23,6 +23,8 @@ public class MariaDbUtil {
             String dbName = "sql5708143";
             String urlWithDatabase = connectionUrl + dbHost + "/" + dbName + "?useSSL=false&serverTimezone=UTC";
 
+            System.out.println("urlWithDataBase");
+
             Properties props = new Properties();
             props.setProperty("user", dbUsername);
             props.setProperty("password", dbPassword);
