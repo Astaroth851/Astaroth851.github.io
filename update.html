@@ -1,98 +1,85 @@
 <div class="container-fluid" style="background-color:rgb(192, 192, 192);">
 <div class="contact">
-	<br>
-	<br>
-<div class="row">
-	<div class="col-sm-7">
-		<div class="card bg-light" ng-show="isAdmin">
-			<div class="card-header text-center" style="color:black;">
-				<h2>Update Production</h2>
-				<h5 class="text-success text-center" ng-bind="updateStatus"></h5>
-			</div>			
-		
-			<div class="card-body" style="color: rgb(0, 0, 0);">
-			<form name="updateForm">
-				<div class="form-group">
-					<label for="title" class="font-weight-bold">Title:</label>
-					<input ng-model="movie.title" required ng-minlength="2"
-					 name="title" type="text" class="form-control" 
-					 id="title">
-					 <span class="text-danger" ng-if="!updateForm.title.$valid">
-						 required and must be at least two characters
-					 </span>
-				</div>
-				<div class="form-group">
-					<label for="production" class="font-weight-bold">Production:</label>
-					<select ng-options="value for value in productions"
-						ng-model="movie.production" class="form-control" id="production">
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="releaseYear" class="font-weight-bold">Release Year:</label>
-					<input ng-model="movie.releaseYear" max="2025" min="2015" required name="releaseYear"
-						type="number" class="form-control" id="releaseYear">
-						<span class="text-danger" ng-if="!updateForm.releaseYear.$valid">
-							required and must be between 2015 and 2025, inclusive
-						</span>
-				</div>
-				<div class="form-group">
-					<label for="link" class="font-weight-bold">Link:</label>
-					<input ng-model="movie.link"
-					 name="link" type="text" class="form-control" id="link">
-				</div>
-				<div class="form-group">
-						<label for="image" class="font-weight-bold">Poster:</label>
-						<input ngf-select accept=".png" ng-model="movie.image" id="fileUploadField"
-						type="file" name="image" ngf-resize="{width: 400, height: 600}">
-						
-						<div class="text-center">
-							<img ngf-src="movie.image" class="img-thumbnail">
-							<br><br>
-						<button ng-show="movie.image" ng-click="movie.image=''">remove</button>
-						</div>
-					</div>
-				<div>
-					<span class="font-weight-bold">Create Date:</span> <span
-						ng-bind="movie.createDateTime" id="create"></span>
-				</div>
-				<div>
-					<span class="font-weight-bold">Update Date:</span> <span
-						ng-bind="movie.updateDateTime" id="update"></span>
-				</div>
-			</form>
-			</div>
-			<div class="card-footer text-center">
-				<button type="button" class="btn btn-success" ng-disabled="updateForm.$invalid || disableUpdate" ng-click="updateMovie()">Update</button>
-				<button type="button" class="btn btn-danger" ng-disabled="disableUpdate" ng-click="deleteMovie()">Delete</button>
-				<button type="button" class="btn btn-info" ng-click="goToWorkView()">Cancel</button>
-			</div>
-		</div>
-	</div>
-	<div class="col-sm-5">
-			<br>
-			<br>
-		<div class="text-center">	
-		<div ng-show="movie.image" class="img"> 
-		<img src="data:image/png;base64,{{movie.image}}" class="img-fluid"
-		style="width:400px;height:600px;"> 
-	</div>
-	</div>
-		<!--<img class="img" src="images/Posters/{{movie.id}}.png" alt="Image not found" onerror="this.src='images/Posters/0.png';" style="width:400px;height:600px;"> -->
-		<br>
-		<br>
-	</div>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-sm-7">
+            <div class="card bg-light" ng-show="isAdmin">
+                <div class="card-header text-center" style="color:black;">
+                    <h2>Update Production</h2>
+                    <h5 class="text-success text-center" ng-bind="updateStatus"></h5>
+                </div>            
+                <div class="card-body" style="color: rgb(0, 0, 0);">
+                    <form name="updateForm">
+                        <div class="form-group">
+                            <label for="title" class="font-weight-bold">Title:</label>
+                            <input ng-model="movie.title" required ng-minlength="2" name="title" type="text" class="form-control" id="title">
+                            <span class="text-danger" ng-if="!updateForm.title.$valid">
+                                required and must be at least two characters
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="production" class="font-weight-bold">Production:</label>
+                            <select ng-options="value for value in productions" ng-model="movie.production" class="form-control" id="production"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="releaseYear" class="font-weight-bold">Release Year:</label>
+                            <input ng-model="movie.releaseYear" max="2025" min="2015" required name="releaseYear" type="number" class="form-control" id="releaseYear">
+                            <span class="text-danger" ng-if="!updateForm.releaseYear.$valid">
+                                required and must be between 2015 and 2025, inclusive
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="link" class="font-weight-bold">Link:</label>
+                            <input ng-model="movie.link" name="link" type="text" class="form-control" id="link">
+                        </div>
+                        <div class="form-group">
+                            <label for="image" class="font-weight-bold">Poster:</label>
+                            <input ngf-select accept=".png" ng-model="movie.image" id="fileUploadField" type="file" name="image" ngf-resize="{width: 400, height: 600}">
+                            <div class="text-center">
+                                <img ngf-src="movie.image ? 'data:image/png;base64,' + movie.image : 'images/Posters/0.png'" class="img-thumbnail" style="width: 75px; height: 120px;">
+                                <br><br>
+                                <button ng-show="movie.image" ng-click="movie.image=''">remove</button>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="font-weight-bold">Create Date:</span> <span ng-bind="movie.createDateTime" id="create"></span>
+                        </div>
+                        <div>
+                            <span class="font-weight-bold">Update Date:</span> <span ng-bind="movie.updateDateTime" id="update"></span>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <button type="button" class="btn btn-success" ng-disabled="updateForm.$invalid || disableUpdate" ng-click="updateMovie()">Update</button>
+                    <button type="button" class="btn btn-danger" ng-disabled="disableUpdate" ng-click="deleteMovie()">Delete</button>
+                    <button type="button" class="btn btn-info" ng-click="goToWorkView()">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <br>
+            <br>
+            <div class="text-center">    
+                <div ng-show="movie.image" class="img"> 
+                    <img ng-src="data:image/png;base64,{{movie.image}}" class="img-fluid" style="width:400px;height:600px;"> 
+                </div>
+            </div>
+            <br>
+            <br>
+        </div>
+    </div>
 </div>
 </div>
-	</div>	
 <section class="footer">
-		<div>
-			<div class="container">
-			<div class="text-center">
-				<br>
-				<img src="images/Footer/Ryan Bates Sound Logo Without Info.png" style="width:100px;height:100px;">
-				<br>
-				<br>
-				</div>
-			</div>
-			</div>
-		</section>
+    <div>
+        <div class="container">
+            <div class="text-center">
+                <br>
+                <img src="images/Footer/Ryan Bates Sound Logo Without Info.png" style="width:100px;height:100px;">
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+</section>
