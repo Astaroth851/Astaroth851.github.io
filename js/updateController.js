@@ -35,49 +35,44 @@
                 });
         };
 
-        $scope.updateMovie = function() {
-            if (!$scope.isAdmin) {
-                console.log('User is not an admin. Cannot update movie.');
-                return;
-            }
-            
-            const file = document.getElementById('fileUploadField').files[0];
-            console.log('File:', file);
-            const fileReader = new FileReader();
+       $scope.updateMovie = function() {
+    if (!$scope.isAdmin) {
+        console.log('User is not an admin. Cannot update movie.');
+        return;
+    }
+    
+    const file = document.getElementById('fileUploadField').files[0];
+    if (file) {
+        const fileReader = new FileReader();
 
-            // event handler that is called when the load event is fired
-            fileReader.onload = function(event) {      
-                var data = fileReader.result;      
-                if (data !== undefined && data.length > 0) { 
-                    // data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZkAAAHVCAIAAACs 
-                    // XRGOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjw...      
-                    // remove the 'data' name/value      
-                    $scope.movie.image = data.split(',')[1];
-                } else {      
-                    $scope.movie.image = '';
-                }      
-                $scope.postUpdatedMovie();    
-            };    
-
-            // when the readAsDataURL is finished, then the onload event is called 
-            if (file !== undefined) {      
-                fileReader.readAsDataURL(file);    
-            } else {
+        fileReader.onload = function(event) {      
+            var data = event.target.result;      
+            if (data) { 
+                // Remove the 'data:image/png;base64,' part      
+                $scope.movie.image = data.split(',')[1];
+            } else {      
                 $scope.movie.image = '';
-                $scope.postUpdatedMovie();
-            }
-        };
+            }      
+            $scope.postUpdatedMovie();    
+        };    
 
-        $scope.postUpdatedMovie = function() {
-            console.log('updateMovie function called');
-            $http.put("/RyanBatesSound/webapi/movies", $scope.movie)
-            .then(function(response) {                
-                $scope.updateStatus = 'update successful';            
-            }, function(response) {
-                $scope.updateStatus = 'error trying to update movie';    
-                console.log('error http PUT movies: ' + response.status);
-            });
-        };
+        fileReader.readAsDataURL(file);
+    } else {
+        $scope.movie.image = $scope.movie.image || '';
+        $scope.postUpdatedMovie();
+    }
+};
+
+       $scope.postUpdatedMovie = function() {
+    console.log('Posting updated movie:', $scope.movie);
+    $http.put("/RyanBatesSound/webapi/movies", $scope.movie)
+    .then(function(response) {                
+        $scope.updateStatus = 'update successful';            
+    }, function(response) {
+        $scope.updateStatus = 'error trying to update movie';    
+        console.log('error http PUT movies:', response.status, response.data);
+    });
+};
 
         $scope.deleteMovie = function() {
             if (!$scope.isAdmin) {
@@ -102,3 +97,6 @@
         $scope.checkAdmin();
     });
 })();
+
+ 
+
