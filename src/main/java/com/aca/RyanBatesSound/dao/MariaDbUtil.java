@@ -11,7 +11,8 @@ public class MariaDbUtil {
     private static String connectionUrl = "jdbc:mysql://";
 
     public static Connection getConnection() {
-        Dotenv dotenv = Dotenv.configure().directory("C:\\Users\\Astar\\OneDrive\\eclipse-workspace\\RyanBatesSound").load();
+        // Assuming the .env file is at the root of the project directory
+        Dotenv dotenv = Dotenv.configure().directory("./").load();
 
         Connection connection = null;
         try {
@@ -44,4 +45,3 @@ public class MariaDbUtil {
         }
     }
 }
-    		
