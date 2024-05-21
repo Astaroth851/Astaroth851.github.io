@@ -17,10 +17,10 @@ public class MariaDbUtil {
         Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String dbHost = dotenv.get("DATABASE_HOST");
-            String dbUsername = dotenv.get("DATABASE_USERNAME");
-            String dbPassword = dotenv.get("DATABASE_PASSWORD");
-            String dbName = dotenv.get("DATABASE_NAME");
+            String dbHost = "sql5.freemysqlhosting.net";
+            String dbUsername = "sql5708143";
+            String dbPassword = "SmfN9ibQMa";
+            String dbName = "sql5708143";
             String urlWithDatabase = connectionUrl + dbHost + "/" + dbName + "?useSSL=false&serverTimezone=UTC";
 
             Properties props = new Properties();
