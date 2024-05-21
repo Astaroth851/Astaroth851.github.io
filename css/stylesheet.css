@@ -47,6 +47,10 @@ circle-body {
 	align-items: center;
 }
 
+.table-hover tbody tr td, .table-hover thead th {
+    vertical-align: middle;
+}
+
 .headshot-container {
 	max-width: 80%;
 	display: inline-block;
@@ -56,6 +60,10 @@ circle-body {
 	max-width: 100%;
 	height: auto;
 	clip-path: circle();
+}
+
+.text-xs {
+	font-size: 0.85rem;
 }
 
 body {
