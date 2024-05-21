@@ -20,7 +20,22 @@
 		<br><br>
 		</div>
 		</div>
-	<div class="conatiner-fluid d-none d-lg-block" style="background-color: #000000; color: white;">
+		
+		<div class="container-fliud d-lg-none" style="background-color:rgb(192, 192, 192);"> 
+	<div class="container">
+		<div class="text-center">
+	<a href="https://www.youtube.com/playlist?list=PLd3WWjAta1f--1Wg0EPz7SaVmrWXNQP02" target="_blank" class="btn btn-dark btn-lg btn-circle">
+		Playlist of some projects I've worked on <i class="fa-brands fa-youtube"></i></a>
+		<br><br>
+		<a href="https://www.imdb.com/name/nm9808637/" target="_blank" class="btn btn-dark btn-lg btn-circle">
+		Link to my IMDB <i class="fa-brands fa-imdb"></i></a>
+		<br><br>
+		</div>
+		</div>
+</div>
+<!-- Full Table for Larger Screens -->
+	<!--<div class="conatiner-fluid d-none d-lg-block" style="background-color: #000000; color: white;">-->
+	<div class="conatiner-fluid d-none d-md-block" style="background-color: #000000; color: white;">
 	<div class="card-header bg-dark">
 		<div class="row">
 		<div class="col-md-4">
@@ -63,7 +78,7 @@
 					<td>{{movie.releaseYear | limitTo:4}}</td>	
 					<td><img ng-src="{{movie.image ? 'data:image/png;base64,' + movie.image : 'images/Posters/0.png'}}" class="img-fluid" style="width:75px;height:120px;"></td>		
 				<!--	<td><img class="img-fluid" src="images/Posters/{{movie.id}}.png" alt="Image not found" onerror="this.src='images/Posters/0.png';" style="width:75px;height:120px;"></td>  -->
-					<td><br><a href="{{movie.link}}" target="_blank" class="btn btn-dark" ng-show="movie.link">Click here to watch 
+					<td><a href="{{movie.link}}" target="_blank" class="btn btn-dark" ng-show="movie.link">Click here to watch 
 						<i class="fa-solid fa-play" style="color: #ffffff;"></i>
 					</a></td>	
 				</tr>
@@ -72,28 +87,59 @@
 		<div ng-show="showSpinner" class="myspinner">
 	<div class="spinner-border" style="width: 5rem; height: 5rem;"></div>
 	<br>
-	<p>Loading search results...</p>
+	<p style="color:#ffffff">Loading search results...</p>
 </div>	
 	</div>
-	<div class="card-footer bg-dark">
-		Please select a project for update/delete
 	</div>
-</div>
-</div>
-</div>
+	
+	      <!-- Simplified Table for Smaller Screens -->
+	<div class="conatiner-fluid d-md-none" style="background-color: #000000; color: white;">
+	 <div class="card-header bg-dark">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h4>Full List Of Projects</h4>
+                        <br>
+                        <button class="btn btn-success" ng-click="getAllMovies()">Refresh Projects</button>
+                    </div>
+                    	<div class="col-md-4 text-center">
+							<br><br>
+			<!-- Needs admin Control -->
+			<a class="btn btn-info" href="#!create" ng-show="isAdmin">Create Project</a>
+			<!-- Needs admin Control -->
+			<br>
+			<br>
+			<div class="text-center">
+			Search: <input type="text" maxlength="15" ng-model="searchValue">
+		</div>
+		</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th><button class="btn btn-dark text-xs" ng-click="orderByColumn('title')">Title</button></th>
+                            <th><button class="btn btn-dark text-xs" ng-click="orderByColumn('production')">Production</button></th>
+                            <th><button class="btn btn-dark text-xs" ng-click="orderByColumn('releaseYear')">Release Year</button></th>
+                        </tr>
+                    </thead>
+                    <tbody ng-show="!showSpinner">
+                        <tr class="text-xs" style="color: white; background: black;" ng-repeat="movie in movies | filter:searchValue | orderBy:orderByValue:reverse" ng-click="isAdmin ? goToUpdateView(movie.id) : null">
+                            <td>{{movie.title}}<br><br><img ng-src="{{movie.image ? 'data:image/png;base64,' + movie.image : 'images/Posters/0.png'}}" class="img-fluid" style="width:60px;height:96px;"></td>
+                            <td style="vertical-align: top;">{{movie.production}}</td>
+                            <td>{{movie.releaseYear | limitTo:4}}<br><br><a href="{{movie.link}}" target="_blank" class="btn btn-dark" ng-show="movie.link">Watch <i class="fa-solid fa-play" style="color: #ffffff;"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ng-show="showSpinner" class="myspinner">
+                    <div class="spinner-border" style="width: 5rem; height: 5rem;"></div>
+                    <br>
+                    <p style="color:#ffffff">Loading search results...</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="container-fliud d-lg-none" style="background-color:rgb(192, 192, 192);"> 
-	<div class="container">
-		<div class="text-center">
-	<a href="https://www.youtube.com/playlist?list=PLd3WWjAta1f--1Wg0EPz7SaVmrWXNQP02" target="_blank" class="btn btn-dark btn-lg btn-circle">
-		Playlist of some projects I've worked on <i class="fa-brands fa-youtube"></i></a>
-		<br><br>
-		<a href="https://www.imdb.com/name/nm9808637/" target="_blank" class="btn btn-dark btn-lg btn-circle">
-		Link to my IMDB <i class="fa-brands fa-imdb"></i></a>
-		<br><br>
-		</div>
-		</div>
-</div>
 
 <section class="footer">
 		<div>
