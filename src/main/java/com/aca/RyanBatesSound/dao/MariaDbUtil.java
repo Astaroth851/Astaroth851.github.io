@@ -16,10 +16,10 @@ public class MariaDbUtil {
         Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String dbHost = dotenv.get("DATABASE_HOST");
-            String dbUsername = dotenv.get("DATABASE_USERNAME");
-            String dbPassword = dotenv.get("DATABASE_PASSWORD");
-            String dbName = dotenv.get("DATABASE_NAME");
+            String dbHost = process.env.DATABASE_HOST;
+            String dbUsername = process.env.DATABASE_USERNAME;
+            String dbPassword = process.env.DATABASE_PASSWORD;
+            String dbName = process.env.DATABASE_NAME;
             String urlWithDatabase = connectionUrl + dbHost + "/" + dbName + "?useSSL=false&serverTimezone=UTC";
 
             Properties props = new Properties();
